@@ -5,17 +5,17 @@ using UnityEngine.UI;
 public class LevelCompleteUI : MonoBehaviour
 {
     [Header("Тексты")]
-    [SerializeField] private TMP_Text winText;         // WinText
-    [SerializeField] private TMP_Text coinsAmountText; // LevelAwardPanel/CoinsAmountText
-    [SerializeField] private TMP_Text addSignText;     // LevelAwardPanel/AddSign (опционально)
+    [SerializeField] private TMP_Text winText;
+    [SerializeField] private TMP_Text coinsAmountText;
+    [SerializeField] private TMP_Text addSignText;
 
     [Header("Кнопки")]
-    [SerializeField] private Button continueButton;    // GameButtons/ContinueButton — «Далее»
-    [SerializeField] private Button startButton;       // GameButtons/StartButton — «На главную»
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button startButton;
 
     [Header("Навигация (TopBar)")]
-    [SerializeField] private Button backButton;        // BackButton
-    [SerializeField] private Button shopButton;        // ShopButton
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button shopButton;
 
     private void Awake()
     {

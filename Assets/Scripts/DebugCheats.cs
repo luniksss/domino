@@ -6,8 +6,8 @@ using UnityEditor;
 public class DebugCheats : MonoBehaviour
 {
     [SerializeField] private int coinsToAdd = 500;
-    [SerializeField] private KeyCode addCoinsKey = KeyCode.F1;   // +монеты
-    [SerializeField] private KeyCode resetSaveKey = KeyCode.F2;  // сброс сохранения
+    [SerializeField] private KeyCode addCoinsKey = KeyCode.F1;
+    [SerializeField] private KeyCode resetSaveKey = KeyCode.F2;
 
 #if UNITY_EDITOR
     private void Update()
