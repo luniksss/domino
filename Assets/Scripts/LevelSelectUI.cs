@@ -31,6 +31,6 @@ public class LevelSelectUI : MonoBehaviour
     {
         if (fieldSizeIndex < 0 || fieldSizeIndex >= LevelConfig.FieldSizes.Length) return;
         SaveManager.Instance.StartNewRun(fieldSizeIndex);
-        GameLauncher.LoadGameScene();
+        GameLauncher.StartNewGameScene();
     }
 }

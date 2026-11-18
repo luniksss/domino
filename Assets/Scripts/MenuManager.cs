@@ -21,10 +21,22 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameResults.TryConsumeLevelCompleted(out int reward))
+        if (PlayerPrefs.GetInt("ShowLevelComplete", 0) == 1)
+        {
+            PlayerPrefs.SetInt("ShowLevelComplete", 0);
+
+            int reward = PlayerPrefs.GetInt("LastReward", 0);
             ShowLevelComplete(reward);
+        }
+        else if (PlayerPrefs.GetInt("OpenShopOnLoad", 0) == 1)
+        {
+            PlayerPrefs.SetInt("OpenShopOnLoad", 0);
+            ShowShop();
+        }
         else
+        {
             ShowMain();
+        }
     }
 
     public void ShowMain()                => ShowOnly(mainPanel);

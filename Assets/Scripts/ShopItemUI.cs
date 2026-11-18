@@ -82,18 +82,18 @@ public class ShopItemUI : MonoBehaviour
 
     private bool IsEquipped(GameData data) =>
         category == ShopCategory.Background
-            ? data.selectedBackgroundSkin == itemId
-            : data.selectedTileSkin == itemId;
+            ? data.currentBackgroundSkin == itemId
+            : data.currentDominoSkin == itemId;
 
     private void Unlock(SaveManager sm)
     {
-        if (category == ShopCategory.Background) sm.UnlockBackground(itemId);
-        else                                     sm.UnlockTile(itemId);
+        //if (category == ShopCategory.Background) sm.UnlockBackground(itemId);
+        //else                                     sm.UnlockTile(itemId);
     }
 
     private void Equip(SaveManager sm)
     {
-        if (category == ShopCategory.Background) sm.EquipBackground(itemId);
-        else                                     sm.EquipTile(itemId);
+        //if (category == ShopCategory.Background) sm.EquipBackground(itemId);
+        //else                                     sm.EquipTile(itemId);
     }
 }
