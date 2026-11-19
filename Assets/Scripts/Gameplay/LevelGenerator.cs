@@ -10,7 +10,7 @@ public class LevelGenerator : MonoBehaviour
         int width = config.width;
         int height = config.height;
 
-        Debug.Log($"<color=cyan>Генерация поля {config.displayName}: Ширина {width}, Высота {height}</color>");
+        Debug.Log($"Генерация поля: Ширина {width}, Высота {height}");
 
         state.StartNewLevel(width, height);
 
@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour
 
         state.solutionPairs = new List<List<CellCoord>>(pairs);
 
-        string solutionLog = "<color=yellow>=== РЕШЕНИЕ УРОВНЯ ===</color>\n";
+        string solutionLog = "Решение уровня: \n";
 
         for (int i = 0; i < pairs.Count; i++)
         {
