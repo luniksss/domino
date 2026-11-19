@@ -7,6 +7,9 @@ public class BoardView : MonoBehaviour
     public GameObject dominoPrefab;
     public Sprite[] allDominoSprites;
 
+    private float cellSize = 1.0f;
+    private const float MAX_BOARD_WIDTH = 5.0f;
+
     public void BuildBoard(LevelStateManager state)
     {
         foreach (Transform child in boardParent)
@@ -14,7 +17,7 @@ public class BoardView : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        float cellSize = 1.0f;
+        cellSize = MAX_BOARD_WIDTH / state.fieldWidth;
         float gap = 0.0f;
 
         float startX = -(state.fieldWidth * (cellSize + gap)) / 2f + cellSize / 2f;
@@ -31,6 +34,8 @@ public class BoardView : MonoBehaviour
                     startX + x * (cellSize + gap),
                     startY - y * (cellSize + gap),
                     0);
+
+                cell.transform.localScale = new Vector3(cellSize, cellSize, 1f);
 
                 cell.GetComponentInChildren<TMPro.TextMeshPro>().text = state.field[x, y].ToString();
             }
@@ -70,6 +75,7 @@ public class BoardView : MonoBehaviour
 
         GameObject newDominoObj = Instantiate(dominoPrefab, boardParent);
         newDominoObj.transform.position = centerPos;
+        newDominoObj.transform.localScale = new Vector3(cellSize, cellSize, 1f);
 
         int minVal = Mathf.Min(valA, valB);
         int maxVal = Mathf.Max(valA, valB);
