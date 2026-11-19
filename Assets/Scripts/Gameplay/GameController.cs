@@ -246,8 +246,15 @@ public class GameController : MonoBehaviour
             Debug.Log("ПОБЕДА! Все клетки собраны!");
 
             SaveManager.Instance.Data.levelStateJson = "";           
-            SaveManager.Instance.AddCoins(5);
-            GameLauncher.LoadMenuWithVictory(5);
+
+            int sizeIndex = SaveManager.Instance.Data.currentFieldSizeIndex;
+            int reward = LevelConfig.FieldSizes[sizeIndex].rewardCoins;
+            SaveManager.Instance.AddCoins(reward);
+
+            SaveManager.Instance.Data.currentLevel++;
+            SaveManager.Instance.Save();
+
+            GameLauncher.LoadMenuWithVictory(reward);
         }
     }
 
