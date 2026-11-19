@@ -15,14 +15,12 @@ public class LevelCompleteUI : MonoBehaviour
 
     [Header("Навигация (TopBar)")]
     [SerializeField] private Button backButton;
-    [SerializeField] private Button shopButton;
 
     private void Awake()
     {
         if (continueButton) continueButton.onClick.AddListener(OnContinue);
         if (startButton)    startButton.onClick.AddListener(OnHome);
         if (backButton)     backButton.onClick.AddListener(OnHome);
-        if (shopButton)     shopButton.onClick.AddListener(() => MenuManager.Instance.ShowShop());
     }
 
     public void Show(int rewardCoins)

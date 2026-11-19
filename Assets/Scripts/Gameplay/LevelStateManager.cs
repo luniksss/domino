@@ -11,13 +11,14 @@ public class LevelStateManager : MonoBehaviour
     public List<CellCoord> iceCells = new List<CellCoord>();
     public List<CellCoord> blockedCells = new List<CellCoord>();
     public List<Domino> foundDominoes = new List<Domino>();
+    public List<List<CellCoord>> solutionPairs = new List<List<CellCoord>>();
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(gameObject); 
-            return; 
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
         }
 
         Instance = this;
@@ -32,6 +33,7 @@ public class LevelStateManager : MonoBehaviour
         iceCells.Clear();
         blockedCells.Clear();
         foundDominoes.Clear();
+        solutionPairs.Clear();
     }
 
     public string SerializeToJson()

@@ -7,7 +7,6 @@ public class MenuManager : MonoBehaviour
     [Header("Панели")]
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject levelSelectPanel;
-    [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject levelCompletePanel;
 
     [Header("Контроллеры")]
@@ -28,11 +27,6 @@ public class MenuManager : MonoBehaviour
             int reward = PlayerPrefs.GetInt("LastReward", 0);
             ShowLevelComplete(reward);
         }
-        else if (PlayerPrefs.GetInt("OpenShopOnLoad", 0) == 1)
-        {
-            PlayerPrefs.SetInt("OpenShopOnLoad", 0);
-            ShowShop();
-        }
         else
         {
             ShowMain();
@@ -41,7 +35,6 @@ public class MenuManager : MonoBehaviour
 
     public void ShowMain()                => ShowOnly(mainPanel);
     public void ShowLevelSelect()         => ShowOnly(levelSelectPanel);
-    public void ShowShop()                => ShowOnly(shopPanel);
 
     public void ShowLevelComplete(int rewardCoins)
     {
@@ -53,7 +46,6 @@ public class MenuManager : MonoBehaviour
     {
         if (mainPanel)          mainPanel.SetActive(target == mainPanel);
         if (levelSelectPanel)   levelSelectPanel.SetActive(target == levelSelectPanel);
-        if (shopPanel)          shopPanel.SetActive(target == shopPanel);
         if (levelCompletePanel) levelCompletePanel.SetActive(target == levelCompletePanel);
     }
 }

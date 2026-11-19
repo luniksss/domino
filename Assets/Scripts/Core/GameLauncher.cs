@@ -23,12 +23,6 @@ public static class GameLauncher
         SceneManager.LoadScene(MenuSceneName);
     }
 
-    public static void LoadMenuWithShop()
-    {
-        SceneManager.LoadScene(MenuSceneName);
-        PlayerPrefs.SetInt("OpenShopOnLoad", 1);
-    }
-
     public static void LoadMenuWithVictory(int reward)
     {
         PlayerPrefs.SetInt("LastReward", reward);

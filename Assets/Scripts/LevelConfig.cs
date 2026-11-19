@@ -18,4 +18,9 @@ public static class LevelConfig
         new FieldSizeConfig { displayName = "7 × 6", width = 7, height = 6, rewardCoins = 35 },
         new FieldSizeConfig { displayName = "8 × 7", width = 8, height = 7, rewardCoins = 50 },
     };
+
+    public static FieldSizeConfig FieldSizeBySizeIndex(int sizeIndex)
+    {
+        return FieldSizes[sizeIndex];
+    }
 }

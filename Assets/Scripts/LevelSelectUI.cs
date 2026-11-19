@@ -9,7 +9,6 @@ public class LevelSelectUI : MonoBehaviour
 
     [Header("Навигация")]
     [SerializeField] private Button backButton;
-    [SerializeField] private Button shopButton;
 
     private void Awake()
     {
@@ -24,7 +23,6 @@ public class LevelSelectUI : MonoBehaviour
         }
 
         if (backButton) backButton.onClick.AddListener(() => MenuManager.Instance.ShowMain());
-        if (shopButton) shopButton.onClick.AddListener(() => MenuManager.Instance.ShowShop());
     }
 
     private void OnSizeSelected(int fieldSizeIndex)

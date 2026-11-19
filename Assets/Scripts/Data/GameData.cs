@@ -10,8 +10,6 @@ public class GameData
 
     public string currentBackgroundSkin = "bg_light";
     public string currentDominoSkin = "domino_light";
-    public List<string> unlockedBackgroundSkins = new List<string> { "bg_light" };
-    public List<string> unlockedTileSkins = new List<string> { "domino_light" };
 
     public string levelStateJson = "";
     public bool hasSavedGame = false;

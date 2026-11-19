@@ -362,6 +362,8 @@ MonoBehaviour:
   - {fileID: 1862179295395280505, guid: 8680227951e1fe74ca978942b10c89dd, type: 3}
   - {fileID: 3097684459408675328, guid: 50d704efca48c6b47ae387244011bd63, type: 3}
   - {fileID: 4981267683996305070, guid: 228791c05aa6fc748992a72f7b91a3b3, type: 3}
+  - {fileID: 167790373338544632, guid: e1e7018a379a47f46b602e56caae8a01, type: 3}
+  - {fileID: -2897886457393986872, guid: d88017eba7b79424391ee09b90bac588, type: 3}
 --- !u!4 &912782683
 Transform:
   m_ObjectHideFlags: 0
@@ -377,17 +379,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &980670616 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1007986914339151155, guid: 1ea16d83611944146896b7bd9fa08a0d, type: 3}
-  m_PrefabInstance: {fileID: 2130658829}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1165286615
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +621,7 @@ PrefabInstance:
     - target: {fileID: -2250239968283652328, guid: 1ea16d83611944146896b7bd9fa08a0d, type: 3}
       propertyPath: shopButton
       value: 
-      objectReference: {fileID: 980670616}
+      objectReference: {fileID: 0}
     - target: {fileID: 8234931980436144276, guid: 1ea16d83611944146896b7bd9fa08a0d, type: 3}
       propertyPath: m_Name
       value: TopBar
