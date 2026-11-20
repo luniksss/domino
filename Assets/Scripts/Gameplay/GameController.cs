@@ -25,8 +25,6 @@ public class GameController : MonoBehaviour
         bool isContinue = PlayerPrefs.GetInt("IsContinueLoad", 0) == 1;
         string savedJson = SaveManager.Instance.Data.levelStateJson;
 
-        Debug.Log($"Режим: {(isContinue ? "ПРОДОЛЖИТЬ" : "НОВАЯ ИГРА")}. Есть JSON: {!string.IsNullOrEmpty(savedJson)}");
-
         if (isContinue && !string.IsNullOrEmpty(savedJson))
         {
             LevelStateManager.Instance.DeserializeFromJson(savedJson);
@@ -46,7 +44,13 @@ public class GameController : MonoBehaviour
             }
         }
 
+        RecalculateFreeCells();
+    }
+
+    private void RecalculateFreeCells()
+    {
         freeCells.Clear();
+
         for (int x = 0; x < LevelStateManager.Instance.fieldWidth; x++)
         {
             for (int y = 0; y < LevelStateManager.Instance.fieldHeight; y++)
@@ -54,7 +58,8 @@ public class GameController : MonoBehaviour
                 bool isOccupied = false;
                 foreach (var d in LevelStateManager.Instance.foundDominoes)
                 {
-                    if ((d.startCell.x == x && d.startCell.y == y) || (d.endCell.x == x && d.endCell.y == y))
+                    if ((d.startCell.x == x && d.startCell.y == y) ||
+                        (d.endCell.x == x && d.endCell.y == y))
                     {
                         isOccupied = true;
                         break;
@@ -62,11 +67,11 @@ public class GameController : MonoBehaviour
                 }
 
                 if (!isOccupied)
+                {
                     freeCells.Add(new CellCoord(x, y));
+                }
             }
         }
-
-        Debug.Log($"Свободных клеток: {freeCells.Count}");
     }
 
     private bool IsCellFree(CellCoord cell)
@@ -85,27 +90,45 @@ public class GameController : MonoBehaviour
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject.name.Contains("tile_"))
+            if (hit.collider != null)
             {
-                if (Time.time - lastClickTime < doubleClickThreshold)
+                string objName = hit.collider.gameObject.name;
+                if (objName.StartsWith("tile_"))
                 {
-                    Domino dominoToRemove = null;
-                    foreach (var d in LevelStateManager.Instance.foundDominoes)
+                    if (Time.time - lastClickTime < doubleClickThreshold)
                     {
-                        if (hit.collider.gameObject.name.Contains($"{d.valueA}_{d.valueB}") ||
-                            hit.collider.gameObject.name.Contains($"{d.valueB}_{d.valueA}"))
+                        Domino dominoToRemove = null;
+                        foreach (var d in LevelStateManager.Instance.foundDominoes)
                         {
-                            dominoToRemove = d;
-                            break;
+                            string dominoName1 = $"tile_{d.valueA}_{d.valueB}_0";
+                            string dominoName2 = $"tile_{d.valueB}_{d.valueA}_0";
+
+                            if (objName == dominoName1 || objName == dominoName2)
+                            {
+                                dominoToRemove = d;
+                                break;
+                            }
+                        }
+
+                        if (dominoToRemove != null)
+                        {
+                            GameObject dominoObj = hit.collider.gameObject;
+                            if (dominoObj != null)
+                            {
+                                DestroyDomino(dominoToRemove, dominoObj);
+                            }
                         }
                     }
-
-                    if (dominoToRemove != null)
+                    lastClickTime = Time.time;
+                }
+                else if (objName.StartsWith("Cell_"))
+                {
+                    Vector2Int? cell = view.GetGridCellUnderMouse(Camera.main);
+                    if (cell.HasValue)
                     {
-                        DestroyDomino(dominoToRemove, hit.collider.gameObject);
+                        OnCellPressed(new CellCoord(cell.Value.x, cell.Value.y));
                     }
                 }
-                lastClickTime = Time.time;
             }
             else
             {
@@ -191,8 +214,6 @@ public class GameController : MonoBehaviour
                     freeCells.RemoveAll(c => (c.x == dragStartCell.x && c.y == dragStartCell.y));
                     freeCells.RemoveAll(c => (c.x == endCell.x && c.y == endCell.y));
 
-                    Debug.Log($"Осталось свободных клеток: {freeCells.Count}");
-
                     CheckWinCondition();
                 }
             }
@@ -243,8 +264,6 @@ public class GameController : MonoBehaviour
     {
         if (freeCells.Count == 0)
         {
-            Debug.Log("ПОБЕДА! Все клетки собраны!");
-
             SaveManager.Instance.Data.levelStateJson = "";           
 
             int sizeIndex = SaveManager.Instance.Data.currentFieldSizeIndex;
@@ -260,15 +279,17 @@ public class GameController : MonoBehaviour
 
     private void DestroyDomino(Domino d, GameObject dominoObject)
     {
+        if (dominoObject == null || !LevelStateManager.Instance.foundDominoes.Remove(d))
+        {
+            return;
+        }
+
         Debug.Log($"Уничтожение доминошки: {d.valueA}:{d.valueB}");
-        LevelStateManager.Instance.foundDominoes.Remove(d);
 
         freeCells.Add(d.startCell);
         freeCells.Add(d.endCell);
 
         Destroy(dominoObject);
-
-        Debug.Log($"Доминошка удалена. Свободных клеток: {freeCells.Count}");
     }
 
     public void SaveCurrentState()
@@ -277,6 +298,5 @@ public class GameController : MonoBehaviour
         SaveManager.Instance.Data.levelStateJson = json;
         SaveManager.Instance.Data.hasSavedGame = true;
         SaveManager.Instance.Save();
-        Debug.Log("Прогресс сохранен!");
     }
 }
