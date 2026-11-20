@@ -14,7 +14,11 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+            return; 
+        }
         Instance = this;
     }
 
@@ -33,8 +37,8 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void ShowMain()                => ShowOnly(mainPanel);
-    public void ShowLevelSelect()         => ShowOnly(levelSelectPanel);
+    public void ShowMain() => ShowOnly(mainPanel);
+    public void ShowLevelSelect() => ShowOnly(levelSelectPanel);
 
     public void ShowLevelComplete(int rewardCoins)
     {
@@ -44,8 +48,8 @@ public class MenuManager : MonoBehaviour
 
     private void ShowOnly(GameObject target)
     {
-        if (mainPanel)          mainPanel.SetActive(target == mainPanel);
-        if (levelSelectPanel)   levelSelectPanel.SetActive(target == levelSelectPanel);
+        if (mainPanel) mainPanel.SetActive(target == mainPanel);
+        if (levelSelectPanel) levelSelectPanel.SetActive(target == levelSelectPanel);
         if (levelCompletePanel) levelCompletePanel.SetActive(target == levelCompletePanel);
     }
 }

@@ -19,8 +19,8 @@ public class LevelCompleteUI : MonoBehaviour
     private void Awake()
     {
         if (continueButton) continueButton.onClick.AddListener(OnContinue);
-        if (startButton)    startButton.onClick.AddListener(OnHome);
-        if (backButton)     backButton.onClick.AddListener(OnHome);
+        if (startButton) startButton.onClick.AddListener(OnHome);
+        if (backButton) backButton.onClick.AddListener(OnHome);
     }
 
     public void Show(int rewardCoins)
@@ -28,14 +28,9 @@ public class LevelCompleteUI : MonoBehaviour
         var data = SaveManager.Instance.Data;
         int completedLevel = Mathf.Max(1, data.currentLevel - 1);
 
-        if (winText != null)
-            winText.text = $"Уровень {completedLevel} пройден!";
-
-        if (coinsAmountText != null)
-            coinsAmountText.text = rewardCoins.ToString();
-
-        if (addSignText != null)
-            addSignText.text = "+";
+        if (winText != null) winText.text = $"Уровень {completedLevel} пройден!";
+        if (coinsAmountText != null) coinsAmountText.text = rewardCoins.ToString();
+        if (addSignText != null) addSignText.text = "+";
     }
 
     private void OnContinue()

@@ -9,16 +9,15 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        if (startButton)    startButton.onClick.AddListener(OnStart);
+        if (startButton) startButton.onClick.AddListener(OnStart);
         if (continueButton) continueButton.onClick.AddListener(OnContinue);
     }
 
     private void OnEnable()
     {
-        if (continueButton != null)
-            continueButton.interactable = SaveManager.Instance != null && SaveManager.Instance.Data.hasSavedGame;
+        if (continueButton != null) continueButton.interactable = SaveManager.Instance != null && SaveManager.Instance.Data.hasSavedGame;
     }
 
-    private void OnStart()    => MenuManager.Instance.ShowLevelSelect();
+    private void OnStart() => MenuManager.Instance.ShowLevelSelect();
     private void OnContinue() => GameLauncher.LoadGameScene();
 }
