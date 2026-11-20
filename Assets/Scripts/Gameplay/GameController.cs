@@ -6,7 +6,6 @@ public class GameController : MonoBehaviour
     public LevelGenerator generator;
     public BoardView view;
 
-    private Domino draggedDomino;
     private CellCoord dragStartCell;
     private CellCoord dragEndCell;
 
